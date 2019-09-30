@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="videowebBefore" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="video-service" target="1.7" />
+      <module name="videoDao" target="1.7" />
+      <module name="videopojo" target="1.7" />
+      <module name="videoservice" target="1.7" />
+      <module name="videoutils" target="1.7" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

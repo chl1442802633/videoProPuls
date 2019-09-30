@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    <context:component-scan base-package="com.cui.controller"/>
+
+    <!--  配置视图解析器  -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!--  首字也就是页面所在的目录   -->
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <!--  后缀  -->
+        <property name="suffix" value=".jsp"/>
+    </bean>
+    <bean class="com.cui.exception.MyExceptionResolver"/>
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- 设置上传文件的最大尺寸为 5MB -->
+        <property name="maxUploadSize">
+            <value>5242880</value>
+        </property>
+    </bean>
+    <bean class="com.cui.MySwaggerConfig"/>
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/video/*"/>
+            <mvc:mapping path="/speaker/*"/>
+            <mvc:mapping path="/course/*"/>
+            <mvc:exclude-mapping path="/course/list"/>
+            <mvc:exclude-mapping path="/video/showVideo"/>
+            <bean class="com.cui.interceptor.AfterLoginInteceptor"/>
+        </mvc:interceptor>
+
+    </mvc:interceptors>
+    <mvc:resources mapping="swagger-ui.html" location="classpath:/META-INF/resources/"/>
+    <mvc:resources mapping="/webjars/**"
+                   location="classpath:/META-INF/resources/webjars/"/>
+
+
+    <!-- 释放静态资源的前提条件 注解驱动 -->
+    <mvc:annotation-driven/>
+    <!--  释放静态资源  -->
+    <mvc:default-servlet-handler/>
+</beans>
